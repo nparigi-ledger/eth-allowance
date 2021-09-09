@@ -15,14 +15,9 @@ class header extends Component {
             <div>
                 <div className="jumbotron">
                     <div id="titles">
-                        <h1>ETH Allowance</h1>
+                        <h1>CYAssets</h1>
                         <h2>Find & revoke all the addresses that can spend your tokens</h2>
                     </div>
-                </div>
-                <div id="gh">
-                    <a href="https://github.com/James-Sangalli/eth-allowance" target="_blank">
-                        <img alt="GitHub" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png" width="40" height="40"/>
-                    </a>
                 </div>
                 <h3 id="loading" hidden>Loading, please wait...</h3>
                 <div id="results">
