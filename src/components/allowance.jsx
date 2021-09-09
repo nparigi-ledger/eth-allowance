@@ -65,7 +65,7 @@ class allowance extends Component {
                     <div className="grid-items">{this.props.tx.allowance}</div>
                     <div className="grid-items">
                         <button className="btn btn-danger" name="revoke" onClick={() => { this.setRevokeClick() } }> Revoke</button>
-                        {this.getDappButton()}
+                        
                     </div>
                 </div>
             </div>
