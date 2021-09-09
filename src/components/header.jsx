@@ -20,7 +20,7 @@ class header extends Component {
                     </div>
                 </div>
                 <div id="gh">
-                    <a href="https://github.com/James-Sangalli/eth-allowance" target="_blank">
+                    <a href="https://github.com/James-Sangalli/eth-allowance" target="_blank" rel="noreferrer">
                         <img alt="GitHub" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png" width="40" height="40"/>
                     </a>
                 </div>
