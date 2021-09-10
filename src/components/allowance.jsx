@@ -104,7 +104,6 @@ class allowance extends Component {
               this.setRevokeClick();
             }}
           >
-            {" "}
             Revoke
           </button>
         </td>

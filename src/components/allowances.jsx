@@ -84,12 +84,14 @@ class allowances extends Component {
           </button>
         </div>
 
-        <table class="allowance-table">
+        <table className="allowance-table">
           <thead>
-            <th>Contract</th>
-            <th>Approved Address</th>
-            <th>Allowance</th>
-            <th>Action</th>
+            <tr>
+              <th>Contract</th>
+              <th>Approved Address</th>
+              <th>Allowance</th>
+              <th>Action</th>
+            </tr>
           </thead>
           <tbody>{elements}</tbody>
         </table>
