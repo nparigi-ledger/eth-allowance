@@ -3,6 +3,7 @@ import {
   getQuery,
   getApproveTransactions,
   getName,
+  getApprovedName,
   getEtherScanPage,
   getBalance,
 } from "../helpers/helpers";
@@ -47,7 +48,7 @@ class allowances extends Component {
       for (const index in txs) {
         txs[index].contractName = await getName(txs[index].contract);
         txs[index].balance = await getBalance(txs[index].contract, account);
-        txs[index].approvedName = await getName(txs[index].approved);
+        txs[index].approvedName = await getApprovedName(chainId, txs[index].approved);
       }
       return {
         txs: txs,

@@ -52,6 +52,23 @@ export function getEtherScanPage(chainId) {
   }
 }
 
+export function getEtherScanApprovedName(chainId, contractAddress) {
+  const API_TOKEN = "49CPBRNM6B495NZDWHNMHTYPS7QTM3EIMU";
+
+  switch (chainId) {
+    case 1:
+      return `https://etherscan.io/api?module=contract&action=getsourcecode&apikey=${API_TOKEN}&address=${contractAddress}`;
+    case 3:
+      return `https://api-ropsten.etherscan.io/api?module=contract&action=getsourcecode&apikey=${API_TOKEN}&address=${contractAddress}`
+    case 4:
+      return `https://rinkeby.etherscan.io/api?module=contract&action=getsourcecode&apikey=${API_TOKEN}&address=${contractAddress}`;
+    case 42:
+      return `https://kovan.etherscan.io/api?module=contract&action=getsourcecode&apikey=${API_TOKEN}&address=${contractAddress}`;
+    default:
+      return "";
+  }
+}
+
 export async function getApproveTransactions(query) {
   try {
     let data = await request.get(query);
@@ -108,6 +125,18 @@ export async function getName(contractAddress) {
   } catch (e) {
     // name not found, just use contract address
     console.error(e);
+    return contractAddress;
+  }
+}
+
+// @dev: fetch off-chain contract name
+export async function getApprovedName(chainId, contractAddress) {
+  try {
+    const res =  await fetch(getEtherScanApprovedName(chainId, contractAddress));
+    const data = await res.json();
+    return data.result[0].ContractName ?? contractAddress;
+  } catch (e) {
+    // name not found, just use contract address
     return contractAddress;
   }
 }
