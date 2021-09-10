@@ -1,8 +1,11 @@
 import Web3 from "web3";
+import React from "react";
+import { IFrameEthereumProvider } from '@ledgerhq/iframe-provider';
+
 import Header from "./components/header";
 import Allowances from "./components/allowances";
-import React from "react";
-const web3 = new Web3(Web3.givenProvider);
+
+const web3 = new Web3(new IFrameEthereumProvider());
 
 function App() {
     return (
