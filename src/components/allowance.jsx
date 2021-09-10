@@ -9,6 +9,9 @@ class allowance extends Component {
         this.props = props;
         this.setRevokeClick = this.setRevokeClick.bind(this);
         this.dappURL = this.dappURL.bind(this);
+        this.state = {
+            loading: false
+        }
     }
 
     dappURL() {
@@ -29,26 +32,47 @@ class allowance extends Component {
         is721(contract, this.props.tx.allowanceUnEdited).then((result) => {
             if (result) {
                 //revoke erc721 by nulling the address
+                this.setState({
+                    loading: true
+                });
                 contract.methods
                     .approve(0, this.props.tx.allowanceUnEdited)
                     .send({ from: this.props.account })
                     .then((receipt) => {
                         console.log("revoked: " + JSON.stringify(receipt));
+                        this.setState({
+                            loading: false
+                        });
+                        this.props.onAllowanceRevoke()
                     })
                     .catch((err) => {
+                        this.setState({
+                            loading: false
+                        });
                         console.log("failed: " + JSON.stringify(err));
                     });
             } else {
+                this.setState({
+                    loading: true
+                });
+
                 // revoke erc20 by nulling approval amount
                 contract.methods
                     .approve(this.props.tx.approved, 0)
                     .send({ from: this.props.account })
                     .then((receipt) => {
                         console.log("revoked: " + JSON.stringify(receipt));
+                        this.setState({
+                            loading: false
+                        });
+                        this.props.onAllowanceRevoke()
                     })
                     .catch((err) => {
                         console.log(err);
                         console.log("failed: " + JSON.stringify(err));
+                        this.setState({
+                            loading: false
+                        });
                     });
             }
         });
@@ -101,7 +125,7 @@ class allowance extends Component {
                 </td>
                 <td>{this.props.tx.allowance}</td>
                 <td>
-                    <button
+                    {this.state.loading ? <div>Loading...</div> : <button
                         className="button button--red"
                         name="revoke"
                         onClick={() => {
@@ -109,7 +133,7 @@ class allowance extends Component {
                         }}
                     >
                         Revoke
-                    </button>
+                    </button>}
                 </td>
             </tr>
         );

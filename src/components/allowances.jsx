@@ -71,6 +71,12 @@ class allowances extends Component {
             web3={this.props.web3}
             id={tx.contract}
             account={this.state.account}
+            onAllowanceRevoke={() => {
+              const index = this.state.txs.indexOf(tx);
+              this.setState({
+                txs: this.state.txs.filter((_, i) => i !== index)
+              });
+            }}
           />
         );
       });
