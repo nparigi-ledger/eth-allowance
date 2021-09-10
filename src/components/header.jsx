@@ -10,6 +10,7 @@ class header extends Component {
   };
 
   render() {
+    const { error, loaded } = this.props;
     return (
       <>
         <div className="header" style={{ marginBottom: "2em" }}>
@@ -18,14 +19,20 @@ class header extends Component {
             Find and revoke all the addresses that can spend your tokens.
           </p>
         </div>
-        <div
-          className="subtitle"
-          id="loading"
-          hidden
-          style={{ margin: "2em 0" }}
-        >
-          Loading, please wait...
-        </div>
+        {!loaded && (
+          <div className="subtitle" id="loading" style={{ margin: "2em 0" }}>
+            Loading, please wait...
+          </div>
+        )}
+        {error && (
+          <div
+            className="subtitle text--red"
+            id="loading"
+            style={{ margin: "2em 0" }}
+          >
+            Error: {error.message}
+          </div>
+        )}
       </>
     );
   }

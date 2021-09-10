@@ -4,6 +4,7 @@ import {
   getApproveTransactions,
   getName,
   getEtherScanPage,
+  getBalance,
 } from "../helpers/helpers";
 import Allowance from "./allowance";
 
@@ -19,16 +20,14 @@ class allowances extends Component {
   }
 
   componentDidMount() {
-    document.getElementById("loading").hidden = false;
     this.init()
       .then((obj) => {
         this.setState(obj);
-        document.getElementById("loading").hidden = true;
-        document.getElementById("hideBeforeLoading").hidden = false;
       })
       .catch((err) => {
-        document.getElementById("loading").innerText = err;
-      });
+        this.props.setError(err);
+      })
+      .then(() => this.props.setLoaded(true));
   }
 
   async init() {
@@ -55,8 +54,7 @@ class allowances extends Component {
         account: account,
       };
     } catch (e) {
-      document.getElementById("loading").hidden = false;
-      document.getElementById("loading").innerText = e;
+      this.props.setError(e);
     }
   }
 
@@ -76,8 +74,8 @@ class allowances extends Component {
         );
       });
     }
-    return (
-      <div id="hideBeforeLoading" hidden>
+    return this.props.loaded && !this.props.error ? (
+      <div>
         <div style={{ marginBottom: "4em", textAlign: "center" }}>
           <button className="button button--red" onClick={this.revokeAll}>
             {" "}
@@ -89,6 +87,7 @@ class allowances extends Component {
           <thead>
             <tr>
               <th>Contract</th>
+              <th>Balance</th>
               <th>Approved Address</th>
               <th>Allowance</th>
               <th>Action</th>
@@ -97,7 +96,7 @@ class allowances extends Component {
           <tbody>{elements}</tbody>
         </table>
       </div>
-    );
+    ) : null;
   }
 }
 
