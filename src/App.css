@@ -1,44 +1,85 @@
-#titles
-{
-  text-align: center;
-}
-
-#gh {
-  text-align: center;
-  margin-bottom: 1%;
-}
-
 #loading {
   text-align: center;
 }
 
-#page
-{
-  margin:5%;
+#root {
+  padding: 5em;
+  /* background-color: #f9f9f9; */
 }
 
-#searchResults {
-  margin-left: 3%;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  background-color: lightgrey;
-  padding: 10px;
-}
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 15px;
-  font-size: 30px;
+.header {
   text-align: center;
 }
 
-.grid-items {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 10px;
-  font-size: 15px;
-  text-align: center;
+.title {
+  color: rgb(20, 37, 51);
+  font-family: Inter, Arial;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2em;
+}
+
+.subtitle {
+  color: rgb(20, 37, 51, 0.7);
+  font-family: Inter, Arial;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.4em;
+}
+
+.allowance-table {
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 3%);
+  border: 1px solid rgba(20, 37, 51, 0.1);
+  border-radius: 4px;
+  border-collapse: separate;
+  table-layout: auto;
+  width: 100%;
+}
+
+.allowance-table > thead {
+  background-color: rgba(20, 37, 51, 0.02);
+}
+
+.allowance-table > thead th {
+  padding: 10px 20px;
+  font-family: Inter, Arial;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 12px;
+  color: rgba(20, 37, 51, 0.5);
+  border-bottom: 1px solid rgba(20, 37, 51, 0.1);
+}
+
+.allowance-table > tbody td {
+  padding: 16px 20px;
+  font-family: Inter, Arial;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12px;
+  color: rgb(20, 37, 51);
+}
+
+.button {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 0;
+  padding-bottom: 0;
+  color: rgba(20, 37, 51, 0.6);
+  background-color: transparent;
+  font-size: 12px;
+  font-family: Inter, Arial;
+  font-weight: 600;
+  font-style: normal;
+  border: none;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 34px;
+  outline: none;
+}
+
+.button--red {
+  background: #ea2e49;
+  color: #ffffff;
 }
