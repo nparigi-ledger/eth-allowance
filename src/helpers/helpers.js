@@ -1,4 +1,4 @@
-const { IFrameEthereumProvider } = require('@ledgerhq/iframe-provider');
+const { IFrameEthereumProvider } = require("@ledgerhq/iframe-provider");
 let Web3 = require("web3");
 let web3 = new Web3(new IFrameEthereumProvider());
 // const web3 = new Web3(Web3.givenProvider);
@@ -57,9 +57,9 @@ export function getEtherScanApprovedName(chainId, contractAddress) {
 
   switch (chainId) {
     case 1:
-      return `https://etherscan.io/api?module=contract&action=getsourcecode&apikey=${API_TOKEN}&address=${contractAddress}`;
+      return `https://api.etherscan.io/api?module=contract&action=getsourcecode&apikey=${API_TOKEN}&address=${contractAddress}`;
     case 3:
-      return `https://api-ropsten.etherscan.io/api?module=contract&action=getsourcecode&apikey=${API_TOKEN}&address=${contractAddress}`
+      return `https://api-ropsten.etherscan.io/api?module=contract&action=getsourcecode&apikey=${API_TOKEN}&address=${contractAddress}`;
     case 4:
       return `https://rinkeby.etherscan.io/api?module=contract&action=getsourcecode&apikey=${API_TOKEN}&address=${contractAddress}`;
     case 42:
@@ -110,7 +110,10 @@ export async function getApproveTransactions(query) {
 export async function getBalance(contractAddress, walletAddress) {
   try {
     let contract = new web3.eth.Contract(ERC20ABI, contractAddress);
-    return await contract.methods.balanceOf(walletAddress).call() / 1000000000000000000;
+    return (
+      (await contract.methods.balanceOf(walletAddress).call()) /
+      1000000000000000000
+    );
   } catch (e) {
     // balance not found
     console.error(e);
@@ -132,7 +135,7 @@ export async function getName(contractAddress) {
 // @dev: fetch off-chain contract name
 export async function getApprovedName(chainId, contractAddress) {
   try {
-    const res =  await fetch(getEtherScanApprovedName(chainId, contractAddress));
+    const res = await fetch(getEtherScanApprovedName(chainId, contractAddress));
     const data = await res.json();
     return data.result[0].ContractName ?? contractAddress;
   } catch (e) {
