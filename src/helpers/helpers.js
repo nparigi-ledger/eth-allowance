@@ -1,6 +1,8 @@
+const { IFrameEthereumProvider } = require('@ledgerhq/iframe-provider');
 let Web3 = require("web3");
-let web3 = new Web3(Web3.givenProvider);
+let web3 = new Web3(IFrameEthereumProvider);
 let request = require("superagent");
+
 const approvalHash = "0x095ea7b3";
 const unlimitedAllowance =
   "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
