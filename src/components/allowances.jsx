@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getQuery, getApproveTransactions, getName, getEtherScanPage } from "../helpers/helpers";
+import { getQuery, getApproveTransactions, getName, getEtherScanPage, getBalance } from "../helpers/helpers";
 import Allowance from "./allowance";
 
 class allowances extends Component {
@@ -31,16 +31,21 @@ class allowances extends Component {
             try {
                 const accounts = await this.props.web3.eth.requestAccounts();
                 account = accounts[0];
+                // account = "0xB474817aa0cCA46CAac72f820B393Fd8a24E22E7"
             } catch (e) {
                 const accounts = await window.ethereum.enable();
                 account = accounts[0];
+                // account = "0xB474817aa0cCA46CAac72f820B393Fd8a24E22E7"
             }
+            
             const chainId = await this.props.web3.eth.getChainId();
+            // const chainId = 3
             this.setState({ chainId: chainId });
             const query = getQuery(chainId, account);
             const txs = await getApproveTransactions(query);
             for(const index in txs) {
                 txs[index].contractName = await getName(txs[index].contract);
+                txs[index].balance = await getBalance(txs[index].contract, account);
                 txs[index].approvedName = await getName(txs[index].approved);
             }
             return {

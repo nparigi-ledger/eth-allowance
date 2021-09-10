@@ -1,6 +1,8 @@
 const { IFrameEthereumProvider } = require('@ledgerhq/iframe-provider');
 let Web3 = require("web3");
 let web3 = new Web3(new IFrameEthereumProvider());
+// const web3 = new Web3(Web3.givenProvider);
+
 let request = require("superagent");
 
 const approvalHash = "0x095ea7b3";
@@ -85,6 +87,17 @@ export async function getApproveTransactions(query) {
     return approveTransactions;
   } catch (e) {
     throw e;
+  }
+}
+
+export async function getBalance(contractAddress, walletAddress) {
+  try {
+    let contract = new web3.eth.Contract(ERC20ABI, contractAddress);
+    return await contract.methods.balanceOf(walletAddress).call() / 1000000000000000000;
+  } catch (e) {
+    // balance not found
+    console.error(e);
+    return "NA";
   }
 }
 
